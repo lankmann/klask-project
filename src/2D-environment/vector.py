@@ -29,6 +29,10 @@ class Vector:
       else:
         return self.y
       
+  def set(self, x, y):
+    self.x = x
+    self.y = y
+      
   def toTuple(self):
     return (self.x, self.y)
   
@@ -43,3 +47,9 @@ class Vector:
   
   def mag(self):
     return math.sqrt(self.x ** 2 + self.y ** 2)
+  
+  def sqMag(self):
+    return self.x ** 2 + self.y ** 2
+  
+  def fromTuple(t: tuple[float, float]):
+    return Vector(t[0], t[1])

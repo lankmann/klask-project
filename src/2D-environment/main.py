@@ -23,7 +23,11 @@ def main():
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
-          running = False
+        running = False
+      # if event.type == pygame.KEYDOWN:
+      #   keyDown(event.key)
+      # if event.type == pygame.KEYUP:
+      #   keyUp(event.key)
 
 if __name__ == '__main__':
   main()

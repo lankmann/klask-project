@@ -4,34 +4,37 @@ from vector import Vector
 from screen import Screen
 
 class PhysicsBall:
-  def __init__(self, x, y, radius, mass, elasticity) -> None:
+  def __init__(self, x, y, radius, mass, elasticity, drag) -> None:
     self.pos = Vector(x, y)
     self.radius = radius
-    self.vel = Vector(random.random() - 0.5, random.random() - 0.5)
+    self.vel = Vector(random.random() * 2 - 1, random.random() * 2 - 1)
     self.mass = mass
     self.elasticity = elasticity
+    self.drag = drag
 
   def collide_with_borders(self):
     border_drag = 0.99
+    border_elasticity = 0.7
+    e = min(border_elasticity, self.elasticity)
     if self.pos.y + self.radius > Screen.height:
       self.pos.y = Screen.height - self.radius
-      self.vel.y *= -self.elasticity
+      self.vel.y *= -e
       self.vel.x *= border_drag
     if self.pos.y - self.radius < 0:
       self.pos.y = self.radius
-      self.vel.y *= -self.elasticity
+      self.vel.y *= -e
       self.vel.x *= border_drag
     if self.pos.x + self.radius > Screen.width:
       self.pos.x = Screen.width - self.radius
-      self.vel.x *= -self.elasticity
+      self.vel.x *= -e
       self.vel.y *= border_drag
     if self.pos.x - self.radius < 0:
       self.pos.x = self.radius
-      self.vel.x *= -self.elasticity
+      self.vel.x *= -e
       self.vel.y *= border_drag
 
-  def collide_with_balls(self, balls):
-    for ball in balls:
+  def collide_with_objects(self, objects):
+    for ball in objects:
       if not ball is self:
         self.solve_collision(ball)
 
@@ -78,5 +81,6 @@ class PhysicsBall:
 
   def update(self):
     self.collide_with_borders()
-    self.vel.y += 0.01
+    # self.vel.y += 0.01
+    self.vel *= self.drag
     self.pos += self.vel
