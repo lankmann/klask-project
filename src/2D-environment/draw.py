@@ -8,7 +8,7 @@ from moutain import Mountain
 from goal import Goal
 
 goals: list[Goal] = []
-mountains = []
+mountains: list[Mountain] = []
 
 def setup():
   global screen
@@ -18,14 +18,14 @@ def setup():
   global physicsObjects
   physicsObjects = []
   global player1
-  player1 = Striker(2, screen.height / 2)
+  player1 = Striker(3, screen.height / 2)
   global player2
-  player2 = Striker(screen.width - 2, screen.height / 2)
+  player2 = Striker(screen.width - 3, screen.height / 2)
   global ball
-  ball = Ball(screen.width / 2, screen.height / 2)
+  ball = Ball(2, 2)
 
-  for i in range(3):
-    mountains.append(Mountain(random.random() * screen.width, random.random() * screen.height))
+  for i in range(-1, 2, 1):
+    mountains.append(Mountain(screen.width / 2, screen.height / 2 + i * 10))
 
   goals.append(Goal(4, screen.height / 2))
   goals.append(Goal(screen.width - 4, screen.height / 2))
@@ -52,6 +52,13 @@ def draw(frameCount):
     obj.display(surface, screen)
     obj.collide_with_objects(physicsObjects)
     obj.update()
+
+  for mountain in mountains:
+    if mountain.stuck:
+      if mountain in physicsObjects:
+        physicsObjects.remove(mountain)
+      mountain.display(surface, screen)
+    mountain.applyMagneticForce([player1, player2])
 
   keys = pg.key.get_pressed()
 

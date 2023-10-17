@@ -7,7 +7,7 @@ class PhysicsBall:
   def __init__(self, x, y, radius, mass, elasticity, drag) -> None:
     self.pos = Vector(x, y)
     self.radius = radius
-    self.vel = Vector(random.random() * 2 - 1, random.random() * 2 - 1)
+    self.vel = Vector(0, 0)
     self.mass = mass
     self.elasticity = elasticity
     self.drag = drag

@@ -44,6 +44,7 @@ class Vector:
     if mag != 0:
       self.x /= mag
       self.y /= mag
+    return self
   
   def mag(self):
     return math.sqrt(self.x ** 2 + self.y ** 2)

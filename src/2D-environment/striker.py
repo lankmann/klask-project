@@ -4,10 +4,10 @@ from vector import Vector
 
 class Striker(PhysicsBall):
   def __init__(self, x, y) -> None:
-    striker_radius = 1
+    striker_radius = 1.5
     striker_mass = 1
     striker_elasticity = 0.7
-    striker_drag = 0.92
+    striker_drag = 0.96
     self.movement = Vector(0, 0)
     super().__init__(x, y, striker_radius, striker_mass, striker_elasticity, striker_drag)
 
@@ -22,7 +22,7 @@ class Striker(PhysicsBall):
     self.move(target_velocity)
 
   def move(self, target_velocity: Vector):
-    acceleration = 0.08
+    acceleration = 0.06
     movement = target_velocity - self.vel
     movement.normalize()
     self.vel += movement * acceleration
