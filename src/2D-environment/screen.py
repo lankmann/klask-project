@@ -20,3 +20,9 @@ class Screen:
       return args[0] * scale
     else:
       return Vector(args[0] * scale, args[1] * scale)
+  
+  def screenToWorld(self, *args):
+    if len(args) == 1:
+      return args[0] / scale
+    else:
+      return Vector(args[0] / scale, args[1] / scale)
