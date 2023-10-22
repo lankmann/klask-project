@@ -3,7 +3,8 @@ import pygame as pg
 from vector import Vector
 
 class Striker(PhysicsBall):
-  def __init__(self, x, y) -> None:
+  def __init__(self, x, y, id) -> None:
+    self.id = id
     striker_radius = 1.5
     striker_mass = 1
     striker_elasticity = 0.7
